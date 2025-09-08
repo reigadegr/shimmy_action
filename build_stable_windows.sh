@@ -6,6 +6,8 @@ export RUSTFLAGS="
     -C linker-plugin-lto=no \
     -C link-arg=/OPT:REF,ICF \
     -C symbol-mangling-version=v0 \
+    -C target-feature=+crt-static \
+    -C link-arg=ucrt.lib \
     -C llvm-args=-fp-contract=off \
     -C llvm-args=-enable-misched \
     -C llvm-args=-enable-post-misched \
