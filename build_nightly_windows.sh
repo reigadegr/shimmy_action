@@ -18,19 +18,19 @@ export RUSTFLAGS="
     -C relro-level=none \
     -C code-model=small \
     -C linker-plugin-lto=no \
-    -C default-linker-libraries \
     -C target-feature=+crt-static \
     -C symbol-mangling-version=v0 \
+    -C link-arg=libcmt.lib \
+    -C link-arg=/NODEFAULTLIB:msvcrt \
     -C link-arg=ucrt.lib \
     -C link-arg=legacy_stdio_definitions.lib \
+    -C link-arg=/OPT:REF,ICF \
     -C llvm-args=-fp-contract=off \
     -C llvm-args=-enable-misched \
     -C llvm-args=-enable-post-misched \
-    -C llvm-args=-enable-dfa-jump-thread \
-    -C link-args=-Wl,--sort-section=alignment \
-    -C link-args=-Wl,-O3,--gc-sections,--as-needed \
-    -C link-args=-Wl,-x,-s,--strip-all
-" 
+    -C llvm-args=-enable-dfa-jump-thread
+"
+
 
 cargo update
 
