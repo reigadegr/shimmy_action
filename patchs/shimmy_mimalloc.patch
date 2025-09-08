@@ -1,0 +1,13 @@
+diff --git a/src/main.rs b/src/main.rs
+index d189368..4143f96 100644
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -21,6 +21,8 @@ pub struct AppState {
+     pub engine: Box<dyn engine::InferenceEngine>,
+     pub registry: Registry,
+ }
++#[global_allocator]
++static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+ 
+ #[tokio::main]
+ async fn main() -> anyhow::Result<()> {

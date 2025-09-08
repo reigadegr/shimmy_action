@@ -1,0 +1,22 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index 5f16aa2..8831d56 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -61,9 +61,15 @@ reqwest = { version = "0.11", features = ["json"] }
+ tokio-tungstenite = "0.20"
+ 
+ [profile.release]
+-lto = true
++overflow-checks = false
+ codegen-units = 1
+-opt-level = "z"
++lto = "fat"
++opt-level = 3
++strip = true
++debug = 0
++debug-assertions = false
++incremental = false
++
+ 
+ # Optimize build times for development
+ [profile.dev]
