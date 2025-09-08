@@ -1,7 +1,7 @@
 diff --git a/Cargo.toml b/Cargo.toml
 index 5f16aa2..8831d56 100644
---- a/Cargo.toml
-+++ b/Cargo.toml
+--- a/shimmy/Cargo.toml
++++ b/shimmy/Cargo.toml
 @@ -61,9 +61,15 @@ reqwest = { version = "0.11", features = ["json"] }
  tokio-tungstenite = "0.20"
  
