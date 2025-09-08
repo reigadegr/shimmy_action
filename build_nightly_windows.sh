@@ -21,6 +21,7 @@ export RUSTFLAGS="
     -C default-linker-libraries \
     -C target-feature=+crt-static \
     -C symbol-mangling-version=v0 \
+    -C link-arg=ucrt.lib \
     -C link-arg=legacy_stdio_definitions.lib \
     -C llvm-args=-fp-contract=off \
     -C llvm-args=-enable-misched \
