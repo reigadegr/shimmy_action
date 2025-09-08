@@ -22,7 +22,6 @@ export RUSTFLAGS="
     -C symbol-mangling-version=v0 \
     -C link-arg=libcmt.lib \
     -C link-arg=/NODEFAULTLIB:msvcrt \
-    -C link-arg=ucrt.lib \
     -C link-arg=legacy_stdio_definitions.lib \
     -C link-arg=/OPT:REF,ICF \
     -C llvm-args=-fp-contract=off \
