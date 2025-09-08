@@ -32,8 +32,6 @@ export RUSTFLAGS="
     -C llvm-args=-enable-dfa-jump-thread
 "
 
-
-
 cargo update
 
 export CARGO_TERM_COLOR=always
