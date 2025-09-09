@@ -8,7 +8,7 @@ export RUSTFLAGS="
     -Z box-noalias=yes \
     -Z share-generics=yes \
     -Z remap-cwd-prefix=. \
-    -Z no-leak-check=yes \
+    -Z no-leak-check \
     -Z strict-init-checks=no \
     -Z randomize-layout=no \
     -Z extra-const-ub-checks=no \
