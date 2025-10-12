@@ -38,23 +38,11 @@ runs:
   steps:
     - name: Install system dependencies (Ubuntu)
       if: runner.os == 'Linux'
-      shell: bash
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y \
-          musl-tools \
-          build-essential \
-          lld \
-          llvm \
-          clang \
-          libdbus-1-dev \
-          libwayland-dev \
-          libwebkit2gtk-4.1-dev \
-          libxdo-dev \
-          pkg-config \
-          libssl-dev \
-          linux-modules-extra-"$(uname -r)"
-        
+      uses: awalsh128/cache-apt-pkgs-action@latest 
+      with: 
+        packages: musl-tools build-essential lld llvm clang libdbus-1-dev libwayland-dev libwebkit2gtk-4.1-dev libxdo-dev pkg-config libssl-dev 
+        execute_install_scripts: true
+
     - name: Optimize Memory Management
       if: runner.os == 'Linux'
       shell: bash
