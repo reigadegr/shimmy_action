@@ -152,6 +152,7 @@ jobs:
           mkdir output || true
           for i in $(ls); do
               [ -f "$work_space/$i/Cargo.toml" ] || continue
+              git init; git add  .; git commit -m "init" || true
               rm -rf ~/.cargo/git ~/.cargo/registry ~/.cache || true
               cd "$work_space/$i"
               echo "当前编译的项目: $i"
