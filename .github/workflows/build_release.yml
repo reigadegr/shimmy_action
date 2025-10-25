@@ -116,9 +116,6 @@ jobs:
           git init
           mkdir -p output || true
           echo "flag" > output/flag.txt
-          if [ "${{ github.event.inputs.USE_O2 }}" = "true" ]; then
-              sed -i 's/+opt-level = 3/+opt-level = 2/g' ./self_code/patchs/*
-          fi
           git add  . && git commit -m "auto commit" >/dev/null 2>&1 || echo "无需提交"
           for i in `realpath ./self_code/patchs/*.patch`; do
              patch -p1 -F 3 < $i && git add  . && git commit -m "$i成功应用" || echo "$i应用失败" >>output/failure.log
@@ -126,6 +123,26 @@ jobs:
              git clean -df
           done
           rm -f output/flag.txt
+
+      - name: "⚙️ Reset flags"
+        shell: bash
+        run: |
+          work_space="$(pwd)"
+          for i in $(ls); do
+              [ -f "$work_space/$i/Cargo.toml" ] || continue
+              cd $i
+              rm -rf .cargo/ || echo "无需删除目录"
+              mkdir -p .cargo/
+              curl -L https://github.com/reigadegr/shimmy_action/raw/main/.cargo/config.toml -o .cargo/config.toml
+              case "$i" in
+                  *)
+                      if [ "${{ github.event.inputs.USE_O2 }}" = "true" ]; then
+                          sed -i 's/+opt-level = 3/+opt-level = 2/g' .cargo/config.toml
+                      fi
+                      ;;
+              esac
+              cd  ..
+          done
 
       - name: Build Rust Utils
         shell: bash
@@ -139,12 +156,6 @@ jobs:
               cd "$work_space/$i"
               echo "当前编译的项目: $i"
               case "$i" in
-                  "ripgrep")
-                      bin_name="rg"
-                      ;;
-                  "mdBook")
-                      bin_name="mdbook"
-                      ;;
                   *)
                       bin_name="$i"
                       ;;
@@ -154,7 +165,7 @@ jobs:
               platform="${{ contains(github.event.inputs.TARGET, 'windows') && 'windows' || (contains(github.event.inputs.TARGET, 'apple') && 'apple' || 'linux') }}"
               file="build_"$toolchain"_"$platform".sh"
 
-              url="https://github.com/reigadegr/shimmy_action/raw/main/$file"
+              url="https://github.com/reigadegr/shimmy_action/raw/main/script/$file"
               echo "脚本直链: $url"
               curl -L $url -o "$file"
               sh "$file" "${{ matrix.target }}" "$bin_name" || continue
