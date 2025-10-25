@@ -21,7 +21,6 @@ export RUSTFLAGS="
     -Z precise-enum-drop-elaboration=yes
     -C relro-level=none
     -C code-model=small
-    -C linker-plugin-lto=no
     -C link-arg=/OPT:REF,ICF
     -C target-cpu=native
     -C symbol-mangling-version=v0

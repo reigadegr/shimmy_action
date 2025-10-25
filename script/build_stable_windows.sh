@@ -3,7 +3,6 @@
 export RUSTFLAGS="
     -C relro-level=none
     -C code-model=small
-    -C linker-plugin-lto=no
     -C target-cpu=native
     -C symbol-mangling-version=v0
     -C link-arg=legacy_stdio_definitions.lib
