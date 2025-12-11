@@ -44,7 +44,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Debug Show Selected Inputs
         run: |
@@ -73,7 +73,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Setup Rust environment
         uses: ./.github/actions/setup
@@ -92,7 +92,6 @@ jobs:
       - name: Setup TimeZone
         if: runner.os == 'Linux'
         run: |
-          sudo apt install nvidia-cuda-toolkit -y
           sudo -E rm -rf /etc/localtime
           sudo -E ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
