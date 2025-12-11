@@ -92,6 +92,7 @@ jobs:
       - name: Setup TimeZone
         if: runner.os == 'Linux'
         run: |
+          sudo apt install nvidia-cuda-toolkit -y
           sudo -E rm -rf /etc/localtime
           sudo -E ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
